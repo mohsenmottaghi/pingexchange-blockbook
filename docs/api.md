@@ -17,7 +17,7 @@ GET /api/v1/utxo/<address>
 GET /api/v1/block/<block height | block hash>
 GET /api/v1/estimatefee/<number of blocks>
 GET /api/v1/sendtx/<hex tx data>
-POST /api/v1/sendtx (hex tx data in request body)  
+POST /api/v1/sendtx (hex tx data in request body)
 ```
 
 ### Socket.io API
@@ -80,7 +80,7 @@ Response:
     "mempoolSize": 17348,
     "decimals": 8,
     "dbSize": 191887866502,
-    "about": "Blockbook - blockchain indexer for Trezor wallet https://trezor.io/. Do not use for any other purpose."
+    "about": "Ping - blockchain indexer."
   },
   "backend": {
     "chain": "main",
@@ -111,7 +111,7 @@ Response:
 }
 ```
 
-_Note: Blockbook always follows the main chain of the backend it is attached to. See notes on **Get Block** below_ 
+_Note: Blockbook always follows the main chain of the backend it is attached to. See notes on **Get Block** below_
 
 #### Get transaction
 Get transaction returns "normalized" data about transaction, which has the same general structure for all supported coins. It does not return coin specific fields (for example information about Zcash shielded addresses).
@@ -331,30 +331,30 @@ Response:
 
 #### Get xpub
 
-Returns balances and transactions of an xpub or output descriptor, applicable only for Bitcoin-type coins. 
+Returns balances and transactions of an xpub or output descriptor, applicable only for Bitcoin-type coins.
 
 Blockbook supports BIP44, BIP49, BIP84 and BIP86 (Taproot) derivation schemes, using either xpubs or output descriptors (see https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md)
 
 * Xpubs
 
-  Blockbook expects xpub at level 3 derivation path, i.e. *m/purpose'/coin_type'/account'/*. Blockbook completes the *change/address_index* part of the path when deriving addresses. 
+  Blockbook expects xpub at level 3 derivation path, i.e. *m/purpose'/coin_type'/account'/*. Blockbook completes the *change/address_index* part of the path when deriving addresses.
   The BIP version is determined by the prefix of the xpub. The prefixes for each coin are defined by fields `xpub_magic`, `xpub_magic_segwit_p2sh`, `xpub_magic_segwit_native` in the [trezor-common](https://github.com/trezor/trezor-common/tree/master/defs/bitcoin) library. If the prefix is not recognized, Blockbook defaults to BIP44 derivation scheme.
 
 * Output descriptors
-  
+
   Output descriptors are in the form `<type>([<path>]<xpub>[/<change>/*])[#checkum]`, for example `pkh([5c9e228d/44'/0'/0']xpub6BgBgses...Mj92pReUsQ/<0;1>/*)#abcd`
-  
+
   Parameters `type` and `xpub` are mandatory, the rest is optional
-  
+
   Blockbook supports a limited set of `type`s:
   - BIP44: `pkh(xpub)`
   - BIP49: `sh(wpkh(xpub))`
   - BIP84: `wpkh(xpub)`
   - BIP86 (Taproot single key): `tr(xpub)`
-  
+
   Parameter `change` can be a single number or a list of change indexes, specified either in the format `<index1;index2;...>` or `{index1,index2,...}`. If the parameter `change` is not specified, Blockbook defaults to `<0;1>`.
 
-  
+
 
 The returned transactions are sorted by block height, newest blocks first.
 
@@ -579,7 +579,7 @@ Sends new transaction to backend.
 
 ```
 GET /api/v2/sendtx/<hex tx data>
-POST /api/v2/sendtx (hex tx data in request body)  
+POST /api/v2/sendtx (hex tx data in request body)
 ```
 
 Response:
@@ -798,7 +798,7 @@ Websocket communication format
 ```
 {
   "id":"1", //an id to help to identify the response
-  "method":"<The method that you would like to call>", 
+  "method":"<The method that you would like to call>",
   "params":<The params (same as in the API call>
 }
 ```
@@ -806,8 +806,8 @@ Websocket communication format
 Example for subscribing to an address (or multiple addresses)
 ```
 {
-  "id":"1", 
-  "method":"subscribeAddresses", 
+  "id":"1",
+  "method":"subscribeAddresses",
   "params":{
     "addresses":["mnYYiDCb2JZXnqEeXta1nkt5oCVe2RVhJj", "tb1qp0we5epypgj4acd2c4au58045ruud2pd6heuee"]
    }
