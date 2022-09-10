@@ -55,6 +55,16 @@
                     <td>Current Fiat rates</td>
                     <td>{{timeSpan $bb.CurrentFiatRatesTime}}</td>
                 </tr>
+                {{- if $bb.HasFiatRates -}}
+                <tr>
+                    <td>Current Fiat rates</td>
+                    <td class="data">{{formatTime $bb.CurrentFiatRatesTime}}</td>
+                </tr>
+                <tr>
+                    <td>Historical Fiat rates</td>
+                    <td class="data">{{formatTime $bb.HistoricalFiatRatesTime}}{{if $bb.HasTokenFiatRates}}<br>tokens {{formatTime $bb.HistoricalTokenFiatRatesTime}}{{end}}</td>
+                </tr>
+                {{- end -}}
                 <tr>
                     <td>Historical Fiat rates</td>
                     <td>{{timeSpan $bb.HistoricalFiatRatesTime}}{{if $bb.HasTokenFiatRates}}<br><span class="fw-normal">tokens</span> {{timeSpan $bb.HistoricalTokenFiatRatesTime}}{{end}}</td>

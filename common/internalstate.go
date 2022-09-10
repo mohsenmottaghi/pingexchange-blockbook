@@ -87,6 +87,13 @@ type InternalState struct {
 
 	EnableSubNewTx bool `json:"-"`
 
+	// store only the historical state, not the current state of the fiat rates in DB
+	HasFiatRates                 bool      `json:"-"`
+	HasTokenFiatRates            bool      `json:"-"`
+	CurrentFiatRatesTime         time.Time `json:"-"`
+	HistoricalFiatRatesTime      time.Time `json:"historicalFiatRatesTime"`
+	HistoricalTokenFiatRatesTime time.Time `json:"historicalTokenFiatRatesTime"`
+
 	BackendInfo BackendInfo `json:"-"`
 
 	// database migrations
