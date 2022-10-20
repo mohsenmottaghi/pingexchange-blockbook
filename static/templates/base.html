@@ -4,20 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/main2.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Ping {{.CoinLabel}} Explorer">
     <title>Ping {{.CoinLabel}} Explorer</title>
+    <script type="text/javascript">
+        window.onload=()=>{
+            document.querySelectorAll('[tt]').forEach(e=>new bootstrap.Tooltip(e,{title:e.getAttribute("tt")}));
+            document.querySelectorAll("#header .bb-group>.btn-check").forEach(e=>e.addEventListener('click',(x)=>console.log("clicked",x.target.id)));
+        }
+    </script>
 </head>
 
 <body>
     <header id="header">
-        <div class="container">
-            <nav class="navbar navbar-expand-md navbar-dark bg-trezor">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
                 <a class="navbar-brand" href="/" title="Home">
-					<div alt="Ping Exchange" style="margin: 3px 16px 0px -26px">
+                    <div alt="Ping Exchange" style="margin: 3px 16px 0px -26px">
 						<svg width="128" height="44" viewBox="0 0 338 138" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M166.437 37.1609H190.863C206.85 37.1609 214.135 45.4427 214.135 57.5559C214.135 69.5751 206.85 77.8576 190.863 77.8576H178.075V99.4972H166.437V37.1609ZM190.418 67.6185C198.414 67.6185 202.052 63.787 202.052 57.5559C202.052 51.2313 198.414 47.4034 190.418 47.4034H178.075V67.6185H190.418Z" fill="white"></path>
 							<path d="M220.601 40.4597C220.601 36.8942 223.619 34.135 227.082 34.135C230.459 34.135 233.48 36.8944 233.48 40.4597C233.48 43.9314 230.459 46.6908 227.082 46.6908C223.619 46.6908 220.601 43.9312 220.601 40.4597ZM221.398 53.1917H232.767V99.4966H221.398V53.1917Z" fill="white"></path>
@@ -27,54 +33,62 @@
 							<path d="M110.832 53.5934C110.718 52.5594 110.548 51.5325 110.323 50.5174C110.089 49.4755 109.795 48.4484 109.443 47.4414C109.074 46.3913 108.644 45.3642 108.155 44.3653C108.09 44.233 108.025 44.1004 107.959 43.9755C107.488 43.0538 106.966 42.1595 106.395 41.2968C105.937 40.5978 105.444 39.9224 104.919 39.2732C104.635 38.9127 104.337 38.5666 104.032 38.2208C103.361 37.4537 102.644 36.7287 101.886 36.05C101.544 35.7335 101.195 35.4318 100.839 35.1448C100.199 34.6148 99.5295 34.1218 98.8459 33.6583C97.9911 33.0746 97.1022 32.5438 96.1841 32.0687C96.0604 32.0024 95.9368 31.9364 95.806 31.8774C94.8208 31.3787 93.8054 30.9436 92.7659 30.5748C91.7731 30.2181 90.7604 29.9208 89.7331 29.6844C87.7377 29.2293 85.6984 28.9997 83.6529 29H39.5936C37.9499 28.9994 36.351 29.542 35.0401 30.5454C34.4643 30.9748 33.9545 31.4881 33.5274 32.0687C32.5342 33.3968 31.9978 35.0172 32 36.6827V92.0209C32 92.5361 32.0218 93.0512 32.0655 93.559C32.1379 94.593 32.2936 95.6192 32.531 96.6276C32.7746 97.6783 33.103 98.7071 33.5128 99.7036C33.9372 100.734 34.4482 101.727 35.0401 102.669C35.0619 102.708 35.0862 102.744 35.1129 102.779C35.8044 103.885 36.6062 104.916 37.5056 105.855C37.6875 106.054 37.8766 106.245 38.073 106.429L38.0803 106.437C39.0067 107.344 40.0229 108.153 41.113 108.85C41.1477 108.877 41.1841 108.902 41.2222 108.924C42.1537 109.523 43.1343 110.04 44.1531 110.469C45.1379 110.884 46.1547 111.216 47.1932 111.463C48.1899 111.702 49.2041 111.86 50.2259 111.934H50.2331V112H76.0593V111.971C76.4867 111.888 76.8721 111.657 77.1485 111.317C77.4248 110.977 77.5747 110.549 77.572 110.109C77.5764 109.677 77.4295 109.257 77.1575 108.924C76.9687 108.683 76.7238 108.494 76.4448 108.372C76.3139 108.299 76.1829 108.225 76.0593 108.152C75.5429 107.857 75.0338 107.548 74.5393 107.224C74.0158 106.893 73.5138 106.533 73.0193 106.165C72.8811 106.069 72.7431 105.966 72.612 105.855C72.2339 105.568 71.8629 105.267 71.4994 104.958C71.1648 104.678 70.8376 104.384 70.5176 104.089C70.0594 103.67 69.6158 103.228 69.1938 102.78C69.0265 102.61 68.8592 102.434 68.7065 102.257C68.6191 102.169 68.5392 102.073 68.4593 101.985C67.8105 101.256 67.1984 100.495 66.6255 99.7038C66.2037 99.1224 65.7964 98.5264 65.4181 97.9082C65.1564 97.4888 64.9018 97.062 64.6617 96.6278C64.1079 95.6354 63.6125 94.6108 63.1783 93.5593C62.8873 92.8602 62.6182 92.1464 62.3854 91.4178C62.2764 91.1087 62.1818 90.7997 62.0945 90.4832C61.9418 89.9754 61.8035 89.4605 61.6871 88.9451C61.5635 88.4373 61.4545 87.9221 61.3599 87.4072C61.1743 86.3895 61.0409 85.3628 60.96 84.3312C60.9308 83.9632 60.9091 83.5807 60.8945 83.2054C60.8727 82.786 60.8655 82.359 60.8655 81.9323V72.0346H50.7779C50.3426 72.0362 49.9205 71.8832 49.5854 71.6021C49.2502 71.321 49.0233 70.9298 48.9442 70.4967C48.8949 70.2491 48.8966 69.9939 48.9491 69.747C49.0017 69.5001 49.104 69.2668 49.2497 69.0617L49.3152 68.9661L50.2317 67.6414L50.7845 66.8467L51.4463 65.89L53.2646 63.2555L53.57 62.814L55.701 59.738L56.3047 58.8624L57.8249 56.6622L59.3449 54.4692L59.9484 53.5936L60.8648 52.269L62.0805 50.5178L62.3858 50.0763L64.2113 47.4418L65.4187 45.6906L66.3352 44.366L66.9315 43.505C67.1032 43.2551 67.3322 43.051 67.5987 42.91C67.8653 42.7691 68.1617 42.6955 68.4625 42.6955C68.7633 42.6955 69.0596 42.7691 69.3262 42.91C69.5928 43.051 69.8217 43.2551 69.9935 43.505L70.5899 44.366L71.499 45.6833L72.7136 47.442L73.0191 47.8762L74.5391 50.0765L74.8445 50.518L76.0601 52.2692L76.9766 53.5938L77.5728 54.4621L79.1002 56.6624L80.613 58.8553L81.2239 59.7384L83.355 62.8144L83.6531 63.2487L85.4786 65.8904L86.6942 67.6416L87.6105 68.9663L87.676 69.0619C87.8217 69.267 87.924 69.5003 87.9765 69.7472C88.0291 69.9941 88.0307 70.2493 87.9814 70.4969C87.9162 70.8344 87.7623 71.1479 87.5357 71.4044C87.3092 71.6608 87.0185 71.8506 86.6942 71.9539C86.5149 72.008 86.3286 72.0353 86.1414 72.0348H76.0611V81.2626C76.0601 82.3187 76.2756 83.3636 76.6939 84.3312C76.9253 84.873 77.2208 85.3845 77.5739 85.8545C78.3657 86.9188 79.4118 87.762 80.614 88.3051C81.5726 88.7292 82.6079 88.9472 83.6541 88.9453C83.785 88.9453 83.916 88.9453 84.0468 88.938C84.9415 88.9307 85.8215 88.8717 86.6942 88.7762C87.7162 88.6613 88.7312 88.4894 89.7344 88.2611C90.7243 88.0336 91.7005 87.7486 92.6581 87.4074H92.7671V87.3707C93.8066 87.0019 94.822 86.5668 95.8072 86.0682C96.8345 85.5543 97.8281 84.9742 98.7818 84.3314H98.8473V84.2872C99.9165 83.5654 100.933 82.7661 101.887 81.8956C102.113 81.6969 102.338 81.4834 102.564 81.2626C103.403 80.4536 104.19 79.5908 104.92 78.6797C105.051 78.5177 105.175 78.3559 105.298 78.1866C106.05 77.211 106.733 76.1831 107.342 75.1106C107.56 74.7353 107.764 74.3601 107.96 73.97C108.28 73.3446 108.586 72.6969 108.862 72.0346C109.065 71.5269 109.262 71.0191 109.444 70.4967C109.626 69.9888 109.786 69.4812 109.931 68.9661C110.218 67.9545 110.448 66.9276 110.622 65.89C110.793 64.8722 110.904 63.8451 110.956 62.814H111V56.6615C110.999 55.6365 110.943 54.6123 110.832 53.5934Z" fill="white"></path>
 						</svg>
 					</div>
+                    <span style="padding-left: 140px;">{{.CoinLabel}} Explorer</span>
                 </a>
-                <a class="navbar-brand" href="/">
-                    {{.CoinLabel}} Explorer
-                </a>
-                <button class="navbar-toggler" type="button"
-                    onclick="if(document.getElementById('toggler').className.indexOf('show')>0){document.getElementById('toggler').className='navbar-collapse collapse'}else{document.getElementById('toggler').className='navbar-collapse show'}">
+                {{if .InternalExplorer}}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse" id="toggler">
-                    {{- if .InternalExplorer -}}
-                    <ul class="navbar-nav ml-md-auto">
-                        <li class="nav-item">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav m-md-auto">
+                        <li class="nav-item pe-xl-4">
                             <a href="/blocks" class="nav-link">Blocks</a>
                         </li>
                         <li class="nav-item">
                             <a href="/" class="nav-link">Status</a>
                         </li>
                     </ul>
-                    <span class="navbar-form ml-md-auto">
-                        <form id="search" action="/search" method="get">
-                            <input name="q" type="text" class="form-control"
-                                placeholder="Search for block, transaction, address or xpub" focus="true">
+                    <span class="navbar-form">
+                        <form class="d-flex" id="search" action="/search" method="get">
+                            <input name="q" type="text" class="form-control form-control-lg" placeholder="Search for block, transaction, address or xpub" focus="true">
+                            <button class="btn" type="submit">
+                                <span class="search-icon"></span>
+                            </button>
                         </form>
                     </span>
-                    {{- end -}}
-                    <ul class="navbar-nav ml-md-auto">
-                        <li class="nav-item" style="width: max-content">
-                            <a href="https://ping.exchange/" class="nav-link">Ping Exchange</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://support.ping.exchange" class="nav-link">Support</a>
-                        </li>
-                    </ul>
+                    <div class="bb-group ms-lg-2 mt-2 mt-lg-0" role="group" aria-label="Currency switch">
+                        <input type="radio" class="btn-check" name="btnradio" id="primary-currency" autocomplete="off" checked>
+                        <label class="btn" for="primary-currency">tGOR</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="secondary-currency" autocomplete="off">
+                        <label class="btn" for="secondary-currency">USD</label>
+                    </div>
                 </div>
-            </nav>
-        </div>
+                {{end}}
+            </div>
+        </nav>
     </header>
     <main id="wrap">
         <div class="container">
             {{- template "specific" . -}}
         </div>
     </main>
-    <footer id="footer" class="footer">
+    <footer id="footer">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-trezor">
+            <nav class="navbar navbar-dark">
                 <span class="navbar-nav">
-                    <a class="nav-link" href="https://ping.exchange/" target="_blank" rel="noopener noreferrer">© 2021
-											Ping Exchange</a>
+                    <a class="nav-link" href="https://ping.exchange/" target="_blank" rel="noopener noreferrer">©2021 Ping Exchange</a>
+                </span>
+                <span class="navbar-nav ml-md-auto">
+                    <a class="nav-link" href="{{- .TOSLink -}}" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+                </span>
+                <span class="navbar-nav ml-md-auto d-md-flex d-none">
+                    <a class="nav-link" href="https://trezor.io/" target="_blank" rel="noopener noreferrer">Trezor</a>
+                </span>
+                <span class="navbar-nav ml-md-auto d-md-flex d-none">
+                    <a class="nav-link" href="https://suite.trezor.io/" target="_blank" rel="noopener noreferrer">Suite</a>
+                </span>
+                <span class="navbar-nav ml-md-auto d-md-flex d-none">
+                    <a class="nav-link" href="https://trezor.io/support" target="_blank" rel="noopener noreferrer">Support</a>
                 </span>
                 <span class="navbar-nav ml-md-auto">
                     <a href="/sendtx" class="nav-link">Send Transaction</a>
