@@ -17,7 +17,7 @@ GET /api/v1/utxo/<address>
 GET /api/v1/block/<block height | block hash>
 GET /api/v1/estimatefee/<number of blocks>
 GET /api/v1/sendtx/<hex tx data>
-POST /api/v1/sendtx (hex tx data in request body)
+POST /api/v1/sendtx/ (hex tx data in request body)  
 ```
 
 ### Socket.io API
@@ -579,7 +579,11 @@ Sends new transaction to backend.
 
 ```
 GET /api/v2/sendtx/<hex tx data>
+<<<<<<< HEAD
 POST /api/v2/sendtx (hex tx data in request body)
+=======
+POST /api/v2/sendtx/ (hex tx data in request body)  NB: the '/' symbol at the end is mandatory.
+>>>>>>> 95eb699ccbaeef0ec6d8fd0486de3445b8405e8a
 ```
 
 Response:
