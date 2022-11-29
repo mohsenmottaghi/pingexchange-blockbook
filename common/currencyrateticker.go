@@ -39,6 +39,15 @@ func (t *CurrencyRatesTicker) GetTokenRate(token string) (float32, bool) {
 	return 0, false
 }
 
+// Convert returns token rate in base currency
+func (t *CurrencyRatesTicker) GetTokenRate(token string) (float32, bool) {
+	if t.TokenRates != nil {
+		rate, found := t.TokenRates[strings.ToLower(token)]
+		return rate, found
+	}
+	return 0, false
+}
+
 // Convert converts value in base currency to toCurrency
 func (t *CurrencyRatesTicker) Convert(baseValue float64, toCurrency string) float64 {
 	rate, found := t.Rates[toCurrency]
