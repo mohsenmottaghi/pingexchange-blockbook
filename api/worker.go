@@ -1032,7 +1032,7 @@ func (w *Worker) getEthereumTypeAddressBalances(addrDesc bchain.AddressDescripto
 		if b != nil {
 			ba.BalanceSat = *b
 		}
-		n, err := w.chain.EthereumTypeGetNonce(addrDesc)
+		n, err = w.chain.EthereumTypeGetNonce(addrDesc)
 		if err != nil {
 			return nil, nil, errors.Annotatef(err, "EthereumTypeGetNonce %v", addrDesc)
 		}
