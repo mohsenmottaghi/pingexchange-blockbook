@@ -341,7 +341,7 @@ span.btn-paging:hover {
     position: absolute;
     top: 16px;
     background-size: cover;
-    background-image: url("logo.svg");
+    background-image: url("../logo.svg");
 }
 
 .copyable::before,
