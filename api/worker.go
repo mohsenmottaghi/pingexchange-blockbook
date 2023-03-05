@@ -609,6 +609,9 @@ func (w *Worker) getContractDescriptorInfo(cd bchain.AddressDescriptor, typeFrom
 
 			validContract = false
 		} else {
+			if typeFromContext != bchain.UnknownTokenType && contractInfo.Type == bchain.UnknownTokenType {
+				contractInfo.Type = typeFromContext
+			}
 			if err = w.db.StoreContractInfo(contractInfo); err != nil {
 				glog.Errorf("StoreContractInfo error %v, contract %v", err, cd)
 			}
@@ -1459,6 +1462,35 @@ func (w *Worker) balanceHistoryForTxid(addrDesc bchain.AddressDescriptor, txid s
 					}
 					if _, found := selfAddrDesc[string(txAddrDesc)]; found {
 						countSentToSelf = true
+					}
+				}
+			}
+			// process internal transactions
+			if eth.ProcessInternalTransactions {
+				internalData, err := w.db.GetEthereumInternalData(txid)
+				if err != nil {
+					return nil, err
+				}
+				if internalData != nil {
+					for i := range internalData.Transfers {
+						f := &internalData.Transfers[i]
+						txAddrDesc, err := w.chainParser.GetAddrDescFromAddress(f.From)
+						if err != nil {
+							return nil, err
+						}
+						if bytes.Equal(addrDesc, txAddrDesc) {
+							(*big.Int)(bh.SentSat).Add((*big.Int)(bh.SentSat), &f.Value)
+							if f.From == f.To {
+								(*big.Int)(bh.SentToSelfSat).Add((*big.Int)(bh.SentToSelfSat), &f.Value)
+							}
+						}
+						txAddrDesc, err = w.chainParser.GetAddrDescFromAddress(f.To)
+						if err != nil {
+							return nil, err
+						}
+						if bytes.Equal(addrDesc, txAddrDesc) {
+							(*big.Int)(bh.ReceivedSat).Add((*big.Int)(bh.ReceivedSat), &f.Value)
+						}
 					}
 				}
 			}
